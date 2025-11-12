@@ -1,73 +1,36 @@
-public class Main {
+public class Main{
     public static void main(String[] args) {
-        Car[] cars = {
+        
+        Car[] car ={
             new Car(1, "Toyota", "Camry", 2020, "Black", 25000, "AB123CD"),
-            new Car(2, "Audi", "Civic", 2019, "White", 22000, "EF456GH"),
+            new Car(2, "Honda", "Civic", 2019, "White", 22000, "EF456GH"),
             new Car(3, "Toyota", "Corolla", 2021, "Red", 20000, "IJ789KL"),
             new Car(4, "BMW", "X5", 2018, "Blue", 45000, "MN012OP")
         };
 
-        Car[] toyotaCars = getCarByBrend(cars, "Toyota");
-        System.out.println("Toyota cars found: " + toyotaCars.length);
-        for (Car car : toyotaCars) {
-            System.out.println(" - " + car.getBrand() + " " + car.getModel() + " " + car.getYear());}
-        
-        Car[] audiCars = getCarByBrend(cars, "Audi");
-        System.out.println("Audi cars found: " + audiCars.length);
-        for (Car car : audiCars) {
-            System.out.println(" - " + car.getBrand() + " " + car.getModel() + " " + car.getYear());}
-
+       getcarbybrend(car, "Toyota");
+       System.err.println("\n");
+       getcarbybrendandyear(car,"Toyota", 2019);
 
     }
 
-    public static Car[] getCarByBrend(Car[] cars, String brend) {
-        // Считаем количество машин нужной марки
-        int count = 0;
-        for (Car car : cars) {
-            if (car.getBrand().equalsIgnoreCase(brend)) {
-                count++;    
+    public static Car[] getcarbybrend(Car[] cars, String brend){
+        for (Car car : cars){
+            if (car.getbrend() == brend){
+                System.out.println("Найден авто: "+ car.getid() +" "+ car.getbrend()+" "+car.getmodel()
+                +" "+ car.getyear() +" "+ car.getcolor() + " "+ car.getprice() +" "+ car.getrgnum());
             }
-        }
 
-        // Создаем массив нужного размера
-        Car[] result = new Car[count];
-        int index = 0;
-        
-        // Заполняем массив
-        for (Car car : cars) {
-            if (car.getBrand().equalsIgnoreCase(brend)) {
-                result[index] = car;
-                index++;
-                //pizdes
-            }
         }
-        for (int i = 0; i < result.length; ++i){
-            System.out.println(result[i]);
-        }
-        return result;
+        return cars;
     }
-    public static Car[] getCarByBrendAndYearOperational(Car[] cars, String brend, int years) {
-        int currentYear = java.time.Year.now().getValue();
-        int count = 0;
-        
-        for (Car car : cars) {
-            if (car.getBrand().equalsIgnoreCase(brend) && 
-                (currentYear - car.getYear()) > years) {
-                count++;
-            }
+    public static Car[] getcarbybrendandyear(Car[] cars, String brend, int years){
+        for (Car car : cars){
+            if (car.getbrend() == brend & car.getyear() > years){
+                System.err.println("Найден авто года выпуска больше чем " + years +" лет, марки " + brend +": "+car.getid() +" "+ car.getbrend()+" "+car.getmodel()
+                +" "+ car.getyear() +" "+ car.getcolor() + " "+ car.getprice() +" "+ car.getrgnum());
+            } 
         }
-
-        Car[] result = new Car[count];
-        int index = 0;
-        
-        for (Car car : cars) {
-            if (car.getBrand().equalsIgnoreCase(brend) && 
-                (currentYear - car.getYear()) > years) {
-                result[index] = car;
-                index++;
-            }
-        }
-        
-        return result;
+        return cars;
     }
 }
